@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Estoque - Construção</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><i class='bx bxs-wrench'></i> Controle de Estoque</h1>
+        <nav class="navbar">
+            <a href="Index.html" class="nav-link"><i class='bx bx-plus-circle'></i> Cadastro & Dashboard</a>
+            <a href="estoque.html" class="nav-link active"><i class='bx bx-list-ul'></i> Meu Estoque</a>
+        </nav>
+    </header>
+    <main>
+        <div class="glass-container mt-2">
+            <div class="table-header">
+                <h2>Estoque Atual</h2>
+                <div class="header-actions" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <select id="categoryFilter" class="search-box" style="padding: 10px; max-width: 200px; cursor: pointer; border-radius: 8px;">
+                        <option value="">Todas as Categorias</option>
+                        <option value="Acabamento">Acabamento</option>
+                        <option value="Elétrica">Elétrica</option>
+                        <option value="EPIs e Segurança">EPIs e Segurança</option>
+                        <option value="Estrutural">Estrutural</option>
+                        <option value="Ferramentas">Ferramentas</option>
+                        <option value="Fixação">Fixação</option>
+                        <option value="Hidráulica">Hidráulica</option>
+                        <option value="Pintura">Pintura</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+
+                    <div class="search-box">
+                        <i class='bx bx-search'></i>
+                        <input type="text" id="searchInput" placeholder="Buscar por Nome, Preço ou Data...">
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="inventoryTable">
+                    <thead>
+                        <tr>
+                            <th>Nome do Material</th>
+                            <th>Categoria</th>
+                            <th>Quantidade</th>
+                            <th>Preço (Un.)</th>
+                            <th>Valor Total</th>
+                            <th>Data de Reg.</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Os produtos serão exibidos aqui pelo JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Botões de Backup isolados para evitar cliques acidentais -->
+        <div class="system-tools-area" style="margin-top: 40px; text-align: center; padding: 20px; opacity: 0.5; transition: all 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;"><i class='bx bx-shield-quarter'></i> Ferramentas de Sistema</p>
+            <div style="display: flex; justify-content: center; gap: 15px;">
+                <button id="exportBtn" class="btn-secondary" style="font-size: 0.85rem; padding: 10px 20px;"><i class='bx bx-download'></i> Baixar Backup</button>
+                <label for="importBtn" class="btn-secondary" style="font-size: 0.85rem; padding: 10px 20px; margin: 0; cursor: pointer;"><i class='bx bx-upload'></i> Restaurar Backup</label>
+                <input type="file" id="importBtn" accept=".json" style="display: none;">
+            </div>
+        </div>
+
+    </main>
+    <!-- Modal de Confirmação -->
+    <div id="deleteModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-container">
+            <h3><i class='bx bx-error-circle' style="color: var(--danger-color); font-size: 1.5rem; vertical-align: middle;"></i> Atenção</h3>
+            <p>Tem certeza que deseja excluir este material? Essa ação é irreversível.</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="btn-secondary">Cancelar</button>
+                <button id="confirmDeleteBtn" class="btn-delete-confirm">Sim, Excluir</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

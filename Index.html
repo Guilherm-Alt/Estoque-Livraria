@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque de Construção</title> <!-- Link para o nosso CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Fontes do Google (Poppins) para um visual moderno e elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Ícones gratuitos do Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Cabeçalho (Header) -->
+    <header>
+        <h1><i class='bx bxs-wrench'></i> Controle de Estoque</h1>
+        <nav class="navbar">
+            <a href="Index.html" class="nav-link active"><i class='bx bx-plus-circle'></i> Cadastro & Dashboard</a>
+            <a href="estoque.html" class="nav-link"><i class='bx bx-list-ul'></i> Meu Estoque</a>
+        </nav>
+    </header> <!-- Dashboard - Resumo das Informações -->
+    <section class="dashboard">
+        <div class="card"> <i class='bx bx-box card-icon'></i>
+            <div>
+                <h3>Total de Produtos Únicos</h3>
+                <p id="totalProducts">0</p>
+            </div>
+        </div>
+        <div class="card"> <i class='bx bx-layer card-icon'></i>
+            <div>
+                <h3>Total de Caixas/Itens</h3>
+                <p id="totalItems">0</p>
+            </div>
+        </div>
+        <div class="card"> <i class='bx bx-dollar-circle card-icon'></i>
+            <div>
+                <h3>Valor em Estoque</h3>
+                <p id="totalValue">R$ 0,00</p>
+            </div>
+        </div>
+    </section> <!-- Área Principal -->
+    <main>
+        <!-- Bloco do Formulário (Glassmorphism) -->
+        <div class="glass-container">
+            <div class="form-header">
+                <h2>Novo Produto</h2>
+            </div>
+            <form id="productForm">
+                <!-- Usado pelo JavaScript para saber quando estamos editando um item --> <input type="hidden"
+                    id="editId">
+                <div class="input-group">
+                    <div class="input-box"> <label for="name">Nome do Produto</label> <input type="text" id="name"
+                            required placeholder="Ex: Cimento, Furadeira..."> </div>
+                    <div class="input-box">
+                        <label for="category">Categoria</label>
+                        <select id="category" required>
+                            <option value="" disabled selected>Selecione uma categoria...</option>
+                            <option value="Acabamento">Acabamento</option>
+                            <option value="Elétrica">Elétrica</option>
+                            <option value="EPIs e Segurança">EPIs e Segurança</option>
+                            <option value="Estrutural">Estrutural</option>
+                            <option value="Ferramentas">Ferramentas</option>
+                            <option value="Fixação">Fixação</option>
+                            <option value="Hidráulica">Hidráulica</option>
+                            <option value="Pintura">Pintura</option>
+                            <option value="Outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <label for="quantity">Quantidade</label>
+                        <input type="text" id="quantity" required placeholder="Ex: 5 un, 10 kg, 2 m">
+                    </div>
+                    <div class="input-box"> <label for="price">Preço de Venda Unitário (R$)</label> <input type="number"
+                            id="price" required step="0.01" min="0" placeholder="Ex: 45.90"> </div>
+                    <!-- Novo Item solicitado: Data de Registro -->
+                    <div class="input-box"> <label for="date">Data de Registro</label> <input type="date" id="date"
+                            required> </div>
+                </div> <button type="submit" class="btn-primary" id="submitBtn"> <i class='bx bx-plus'></i> Salvar
+                    Produto </button>
+            </form>
+        </div>
+    </main> <!-- Nosso JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
