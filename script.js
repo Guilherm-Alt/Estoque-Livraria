@@ -46,7 +46,7 @@ function formatDateBR(dateString) {
 // --- ATUALIZAÇÕES DO LAYOUT ---
 
 function updateDashboard() {
-    if (!totalProductsEl) return; // Proteção para rodar apenas no Index.html
+    if (!totalProductsEl) return; // Proteção para rodar apenas no index.html
     const totalProducts = inventory.length;
     const totalItems = inventory.reduce((sum, item) => sum + (parseFloat(item.quantity) || 0), 0);
     const totalValue = inventory.reduce((sum, item) => sum + ((parseFloat(item.quantity) || 0) * (parseFloat(item.price) || 0)), 0);
@@ -150,7 +150,7 @@ if (productForm) {
     });
 
     // TRUQUE DE MÁGICA DE EDIÇÃO ENTRE PÁGINAS! 
-    // Ao carregar a página Index.html, verifica se tem '?editId=numero' na URL e puxa os dados!
+    // Ao carregar a página index.html, verifica se tem '?editId=numero' na URL e puxa os dados!
     const urlParams = new URLSearchParams(window.location.search);
     const editIdParam = urlParams.get('editId');
     
@@ -184,7 +184,7 @@ if (categoryFilter) {
 
 window.editProduct = function (index) {
     // Agora o editar apenas direciona da listagem para a página de Formulário (Repassando na URL qual item vamos alterar)
-    window.location.href = `Index.html?editId=${index}`;
+    window.location.href = `index.html?editId=${index}`;
 }
 
 let itemToDeleteIndex = null;
