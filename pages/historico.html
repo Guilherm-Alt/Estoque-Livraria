@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico - Livraria</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/historico.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><i class='bx bx-book-open'></i> Controle de Estoque</h1>
+        <nav class="navbar">
+            <a href="../index.html" class="nav-link"><i class='bx bx-plus-circle'></i> Cadastro & Dashboard</a>
+            <a href="estoque.html" class="nav-link"><i class='bx bx-list-ul'></i> Meu Estoque</a>
+            <a href="historico.html" class="nav-link active"><i class='bx bx-history'></i> Movimentações</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Novo Formulário Manual de Transação -->
+        <div class="glass-container" style="margin-bottom: 25px;">
+            <div class="form-header">
+                <h2>Registrar Movimentação</h2>
+            </div>
+            <form id="movementForm">
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="movBook">Selecionar Livro</label>
+                        <select id="movBook" required>
+                            <!-- Puxado pelo JS -->
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <label for="movType">Operação</label>
+                        <select id="movType" required>
+                            <option value="SAÍDA">Saída</option>
+                            <option value="ENTRADA">Entrada</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <label for="movPerson">Quem retirou / Comprador(a)</label>
+                        <input type="text" id="movPerson" placeholder="Ex: Cliente Maria (Venda)..." required>
+                    </div>
+                    <div class="input-box">
+                        <label for="movQty">Quantidade</label>
+                        <input type="number" id="movQty" required min="1" value="1">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 15px;"> <i class='bx bx-check'></i> Registrar </button>
+            </form>
+        </div>
+
+        <div class="glass-container mt-2">
+            <div class="table-header">
+                <h2>Histórico de Movimentações</h2>
+                <div class="header-actions" style="display: flex; gap: 10px; align-items: center; justify-content: flex-end;">
+                    <div class="search-box">
+                        <i class='bx bx-search'></i>
+                        <input type="text" id="searchHistory" placeholder="Buscar por Livro...">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Título do Livro</th>
+                            <th>Responsável</th>
+                            <th>Operação</th>
+                            <th>Retirados/Adicionados</th>
+                            <th>Qtd. Resultante</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyBody">
+                        <!-- O histórico será exibido aqui pelo JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="clearHistoryBtn" class="btn-secondary" style="font-size: 0.85rem;"><i class='bx bx-trash'></i> Limpar Histórico</button>
+            </div>
+        </div>
+    </main>
+    <script src="../js/global.js"></script>
+    <script src="../js/historico.js"></script>
+</body>
+</html>
