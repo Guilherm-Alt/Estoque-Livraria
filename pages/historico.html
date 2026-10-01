@@ -19,30 +19,51 @@
         </nav>
     </header>
     <main>
-        <!-- Novo Formulário Manual de Transação -->
+        <!-- Formulário Manual de Transação -->
         <div class="glass-container" style="margin-bottom: 25px;">
             <div class="form-header">
                 <h2>Registrar Movimentação</h2>
             </div>
             <form id="movementForm">
                 <div class="input-group">
+                    <!-- Tipo de Operação (primeiro para guiar os outros campos) -->
                     <div class="input-box">
-                        <label for="movBook">Selecionar Livro</label>
-                        <select id="movBook" required>
+                        <label for="movType">Tipo de Operação</label>
+                        <select id="movType" required>
+                            <option value="SAÍDA">📤 Saída (Empréstimo / Venda)</option>
+                            <option value="ENTRADA">📥 Entrada (Reposição / Novo Livro)</option>
+                        </select>
+                    </div>
+
+                    <!-- Bloco de SAÍDA: só mostra livros existentes -->
+                    <div class="input-box" id="saidaBookBox">
+                        <label for="movBook">Livro do Estoque</label>
+                        <select id="movBook">
                             <!-- Puxado pelo JS -->
                         </select>
                     </div>
-                    <div class="input-box">
-                        <label for="movType">Operação</label>
-                        <select id="movType" required>
-                            <option value="SAÍDA">Saída</option>
-                            <option value="ENTRADA">Entrada</option>
+
+                    <!-- Bloco de ENTRADA: escolher existente ou título novo -->
+                    <div class="input-box" id="entradaBookBox" style="display:none;">
+                        <label for="entradaBookSelect">Livro para Repor</label>
+                        <select id="entradaBookSelect">
+                            <option value="__novo__">➕ Cadastrar novo título...</option>
+                            <!-- Puxado pelo JS -->
                         </select>
                     </div>
-                    <div class="input-box">
-                        <label for="movPerson">Quem retirou / Comprador(a)</label>
-                        <input type="text" id="movPerson" placeholder="Ex: Cliente Maria (Venda)..." required>
+
+                    <!-- Campo de título manual (aparece só quando "Cadastrar novo" é selecionado na entrada) -->
+                    <div class="input-box" id="novoTituloBox" style="display:none;">
+                        <label for="novoTitulo">Título do Novo Livro</label>
+                        <input type="text" id="novoTitulo" placeholder="Ex: A Bíblia de Estudo...">
                     </div>
+
+                    <!-- Pessoa responsável (label muda dinamicamente) -->
+                    <div class="input-box">
+                        <label for="movPerson" id="movPersonLabel">Responsável pela Saída</label>
+                        <input type="text" id="movPerson" placeholder="Ex: Irmã Ana (Empréstimo)..." required>
+                    </div>
+
                     <div class="input-box">
                         <label for="movQty">Quantidade</label>
                         <input type="number" id="movQty" required min="1" value="1">

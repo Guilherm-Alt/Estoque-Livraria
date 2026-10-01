@@ -32,7 +32,7 @@ function setDefaultDate() {
 }
 
 if (productForm) {
-    productForm.addEventListener('submit', function (e) {
+    productForm.addEventListener('submit', async function (e) {
         e.preventDefault(); 
         const product = {
             name: nameInput.value,
@@ -44,7 +44,32 @@ if (productForm) {
 
         const editId = editIdInput.value;
         let qtyChange = parseFloat(product.quantity) || 0;
-        
+
+        // --- Verifica duplicata (só ao cadastrar novo, não ao editar) ---
+        if (editId === '') {
+            const normalize = str => String(str || '')
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '') // remove acentos
+                .trim();
+
+            const nomeBusca  = normalize(product.name);
+            const autorBusca = normalize(product.author);
+
+            const duplicado = inventory.find(item =>
+                normalize(item.name)   === nomeBusca &&
+                normalize(item.author) === autorBusca
+            );
+
+            if (duplicado) {
+                const ok = await showConfirm(
+                    `Já existe um livro com esse nome e autor no estoque:\n\n📖 "${duplicado.name}" — ${duplicado.author || 'Autor não informado'}\n(Saldo atual: ${duplicado.quantity} exemplar(es))\n\nDeseja cadastrar mesmo assim?`,
+                    'Livro Duplicado'
+                );
+                if (!ok) return;
+            }
+        }
+
         if (editId === '') {
             inventory.push(product);
             logTransaction(product.name, 'ENTRADA', `+${qtyChange}`, qtyChange);
@@ -71,6 +96,7 @@ if (productForm) {
         updateDashboard();
         window.history.replaceState({}, document.title, window.location.pathname);
     });
+
 
     const urlParams = new URLSearchParams(window.location.search);
     const editIdParam = urlParams.get('editId');
